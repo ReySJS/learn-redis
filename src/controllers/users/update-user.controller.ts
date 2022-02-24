@@ -1,12 +1,12 @@
 //-------------------------------------------------------------------------------------------------//
 // Archive: src/controllers/users/list-users.controller.ts
 // Description: File responsible for the application's 'register'
-// Data: 2022/01/31
+// Data: 2022/02/24
 // Author: Rey
 //-------------------------------------------------------------------------------------------------//
 
 import { Request, Response } from 'express'
-import { User } from '../../models/Users'
+import prisma from '../../prisma'
 
 export const updateUser = async (req: Request, res: Response) => {
   const { userId } = req.body
@@ -14,11 +14,9 @@ export const updateUser = async (req: Request, res: Response) => {
   delete update.userId
 
   try {
-    const user = await User.findOneAndUpdate(
-      { id: userId },
-      update,
-      { new: true }
-    )
+    const user = await prisma.User.findOneAndUpdate({ id: userId }, update, {
+      new: true,
+    })
 
     return res.json(user)
   } catch (err) {

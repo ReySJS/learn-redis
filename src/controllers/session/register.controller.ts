@@ -6,7 +6,7 @@
 //-------------------------------------------------------------------------------------------------//
 
 import { Request, Response } from 'express'
-import prisma from "../../prisma";
+import prisma from '../../prisma'
 import { userValidation } from '../../validations/user'
 
 export const register = async (req: Request, res: Response) => {
@@ -15,6 +15,7 @@ export const register = async (req: Request, res: Response) => {
     email: string
     phone: string
     password: string
+    type: "USER",
   } = req.body
 
   try {
@@ -24,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
       return res.status(error.status).send(error.message)
     }
 
-    await prisma.User.create(user)
+    await prisma.user.create({ data: { user } })
 
     return res.status(200).send('Novo usuário cadastrado com sucesso')
   } catch (err: any) {

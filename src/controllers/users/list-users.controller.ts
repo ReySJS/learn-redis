@@ -10,7 +10,7 @@ import prisma from '../../prisma'
 
 export const listUsers = async (req: Request, res: Response) => {
   try {
-    const users = await prisma.User.find({}, { email: 1, name: 1 })
+    const users = await prisma.user.findMany({})
     return res.json(users)
   } catch (err) {
     console.log(err)

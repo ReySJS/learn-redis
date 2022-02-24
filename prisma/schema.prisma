@@ -12,13 +12,13 @@ model User {
   name        String
   email       String    @unique
   password    String
+  phone       String    @unique
   ocuppation  String?
   birthDate   DateTime?
   sex         String?
   color       String?
   nationality String?
-  phone       String?
-  cpf         String?   @unique
+  cpf         String?
   rg          String?
   issuingBody String?
   issueDate   DateTime?

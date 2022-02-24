@@ -18,14 +18,14 @@ export const userValidation = async ({ email, phone }: UserTypes) => {
     status: 0,
   }
   try {
-    const duplicateEmail = await prisma.User.findOne({ email })
+    const duplicateEmail = await prisma.user.findUnique({ where: { email } })
     if (duplicateEmail) {
       error.message = 'O email informado já está sendo usado'
       error.status = 409
       return error
     }
 
-    const duplicatePhone = await prisma.User.findOne({ phone })
+    const duplicatePhone = await prisma.user.findUnique({ where: { phone } })
     if (duplicatePhone) {
       error.message = 'O telefone informado já está sendo usado'
       error.status = 409

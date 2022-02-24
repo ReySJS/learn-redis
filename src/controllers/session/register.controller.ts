@@ -15,7 +15,7 @@ export const register = async (req: Request, res: Response) => {
     email: string
     phone: string
     password: string
-    type: "USER",
+    type: 'USER'
   } = req.body
 
   try {
@@ -25,7 +25,7 @@ export const register = async (req: Request, res: Response) => {
       return res.status(error.status).send(error.message)
     }
 
-    await prisma.user.create({ data: { user } })
+    await prisma.user.create({ data: user })
 
     return res.status(200).send('Novo usuário cadastrado com sucesso')
   } catch (err: any) {

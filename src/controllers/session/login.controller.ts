@@ -7,7 +7,8 @@
 
 import 'dotenv/config'
 import { Request, Response } from 'express'
-import prisma from "../../prisma";
+import prisma from '../../prisma'
+import bcrypt from 'bcrypt'
 
 import * as JWT from '../../config/jwt'
 
@@ -15,19 +16,19 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body
 
   try {
-    const user = await prisma.User.findOne({ email }).exec()
+    const user = await prisma.user.findUnique({ where: { email } })
 
     if (!user) {
       return res.status(400).send({ message: 'Usuário não encontrado' })
     }
 
-    user.comparePassword(password, (error: any, match: any) => {
-      if (!match) {
+    const checkPassword = bcrypt.compareSync(password, user.password)
+
+      if (!checkPassword) {
         return res
           .status(400)
           .send({ message: 'A senha informada não é válida' })
       }
-    })
 
     const userInfo = {
       id: user.id,

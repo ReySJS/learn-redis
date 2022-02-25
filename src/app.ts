@@ -17,10 +17,12 @@ export const app = express()
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(cors({
-  origin: '*',
-  credentials: true,
-}))
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+)
 app.use(compression())
 app.use(helmet())
 app.disable('x-powered-by')

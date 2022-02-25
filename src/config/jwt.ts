@@ -10,8 +10,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 
 const secret = process.env.JWT_SECRET
 
-export const sign = (payload: JwtPayload) =>
-  jwt.sign(payload, <string>secret, { expiresIn: '7d' })
+export const sign = (payload: JwtPayload, userId: number) =>
+  jwt.sign(payload, <string>secret, { expiresIn: '7d', subject: userId })
 
 export const verify = (token: string | undefined) =>
   <JwtPayload>jwt.verify(<string>token, <string>secret)

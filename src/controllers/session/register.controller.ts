@@ -1,9 +1,9 @@
-//-------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------------------------------//
 // Archive: src/controllers/session/register.controller.ts
 // Description: File responsible for the application's 'register'
 // Data: 2022/02/24
 // Author: Rey
-//-------------------------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------------------------------//
 
 import { Request, Response } from 'express'
 import prisma from '../../prisma'
@@ -15,7 +15,7 @@ export const register = async (req: Request, res: Response) => {
     email: string
     phone: string
     password: string
-    type: 'USER'
+    type: 'USER' | 'ADMIN'
   } = req.body
 
   try {
@@ -30,5 +30,7 @@ export const register = async (req: Request, res: Response) => {
     return res.status(200).send('Novo usuário cadastrado com sucesso')
   } catch (err: any) {
     console.log(err)
+
+    return res.status(422).send('Não foi possível processar sua solicitação')
   }
 }

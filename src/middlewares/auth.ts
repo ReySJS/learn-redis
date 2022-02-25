@@ -22,23 +22,30 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     JWT.verify(token)
 
     const { sub: userId } = JWT.decode(token)
-    req.userId = String(userId)
-    next()
+
+    req.userId = Number(userId)
+
+    return next()
   } catch (error) {
-    fs.readFile('./src/logs/data.json', 'utf8', (err, data) => {
-      if (err) {
-        console.log(err)
+    fs.readFile('./src/logs/data.json', 'utf8', (readError, data) => {
+      if (readError) {
+        console.log(readError)
       } else {
         const buffer = JSON.parse(data)
         buffer.error.push(error)
         fs.writeFile(
           './src/logs/auth.json',
           JSON.stringify(buffer),
-          (err) => {}
+          (writeError) => {
+            console.log(writeError)
+          }
         )
       }
     })
-    res.cookie('auth', '').status(401).send('Falha na autenticação do usuário')
+    return res
+      .cookie('auth', '')
+      .status(401)
+      .send('Falha na autenticação do usuário')
   }
 }
 // --------------------Middleware to user authentication-----------------------

@@ -7,16 +7,14 @@
 
 import { Router } from 'express'
 
-const routes = Router()
-
 import { listUsers } from '../controllers/users/list-users.controller'
-import { updateUser } from '../controllers/users/update-user.controller'
 import { auth } from '../middlewares/auth'
+
+const routes = Router()
 
 // ------------------------------------------------------------//
 // -----------------------session-routes-----------------------//
 routes.get('/list-users', auth, listUsers)
-routes.put('/update-user', auth, updateUser)
 // -----------------------session-routes-----------------------//
 // ------------------------------------------------------------//
 

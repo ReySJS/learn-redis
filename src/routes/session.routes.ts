@@ -7,13 +7,12 @@
 
 import { Router } from 'express'
 
-const routes = Router()
-
 import { register } from '../controllers/session/register.controller'
 import { login } from '../controllers/session/login.controller'
 import { logout } from '../controllers/session/logout.controller'
 import { auth } from '../middlewares/auth'
 
+const routes = Router()
 
 // ------------------------------------------------------------//
 // -----------------------session-routes-----------------------//

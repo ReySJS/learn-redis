@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------------------------//
-// Archive: src/controllers/users/list-users.controller.ts
-// Description: File responsible for the application's 'register'
+// Archive: src/controllers/users/get-user-info.controller.ts
+// Description: File responsible for obtaining user information
 // Data: 2022/02/24
 // Author: Rey
 // -------------------------------------------------------------------------------------------------//
@@ -9,11 +9,11 @@ import { Request, Response } from 'express'
 import prisma from '../../prisma'
 
 export const listUsers = async (req: Request, res: Response) => {
-  try {
-    const users = await prisma.user.findMany({})
-    return res.json(users)
-  } catch (err) {
-    console.log(err)
-    return res.status(422).send('Não foi possível processar sua solicitação')
-  }
+  const { userId } = req
+
+  console.time('performance')
+  const user = await prisma.user.findUnique({ where: { id: userId } })
+
+  console.timeEnd('performance')
+  return res.json(user)
 }

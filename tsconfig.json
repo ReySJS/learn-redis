@@ -24,7 +24,7 @@
         "transform": "typescript-transform-paths"
       }
     ],
-    "typeRoots": ["./src/@types", "node_modules/@types"]
+    "typeRoots": ["./custom_typings", "./src/@types", "node_modules/@types"]
   },
   "exclude": ["node_modules", "jest.config.ts", "src/__mock__", "src/__tests__"]
 }

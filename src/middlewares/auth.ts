@@ -23,7 +23,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
 
     const { sub: userId } = JWT.decode(token)
 
-    req.userId = Number(userId)
+    req.userId = userId
 
     return next()
   } catch (error) {

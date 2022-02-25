@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2019",
     "module": "commonjs",
     "baseUrl": "./src",
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",
+    "resolveJsonModule": true,
     "paths": {
       "@app/*": ["*"],
       "@config/*": ["config/*"],
       "@controllers/*": ["controllers/*"],
       "@helpers/*": ["helpers/*"],
+      "@logs/*": ["logs/*"],
       "@middlewares/*": ["middlewares/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],

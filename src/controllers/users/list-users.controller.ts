@@ -5,15 +5,13 @@
 // Author: Rey
 // -------------------------------------------------------------------------------------------------//
 
+import { getRedis } from '@app/helpers/RedisClient'
 import { Request, Response } from 'express'
 import prisma from '../../prisma'
 
 export const listUsers = async (req: Request, res: Response) => {
-  try {
-    const users = await prisma.user.findMany({})
-    return res.json(users)
-  } catch (err) {
-    console.log(err)
-    return res.status(422).send('Não foi possível processar sua solicitação')
-  }
+  // const users = await prisma.user.findMany({})
+  const usersRedis = await getRedis('users')
+  const users = JSON.parse(usersRedis)
+  return res.json(users)
 }

@@ -5,7 +5,9 @@
 // Author: Rey
 // -------------------------------------------------------------------------------------------------//
 
+import { setRedis } from '@app/helpers/RedisClient'
 import { Request, Response } from 'express'
+import bcrypt from 'bcrypt'
 import prisma from '../../prisma'
 import { userValidation } from '../../validations/user'
 
@@ -14,9 +16,10 @@ export const register = async (req: Request, res: Response) => {
     name: string
     email: string
     phone: string
-    password: string
     type: 'USER' | 'ADMIN'
   } = req.body
+
+  const password = await bcrypt.hash(req.body.password, 10)
 
   try {
     const error = await userValidation(user)
@@ -25,7 +28,12 @@ export const register = async (req: Request, res: Response) => {
       return res.status(error.status).send(error.message)
     }
 
-    await prisma.user.create({ data: user })
+    await prisma.user.create({
+      data: { ...user, password },
+    })
+
+    const users = await prisma.user.findMany({})
+    await setRedis(`users`, JSON.stringify(users))
 
     return res.status(200).send('Novo usuário cadastrado com sucesso')
   } catch (err: any) {

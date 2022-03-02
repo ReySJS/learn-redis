@@ -6,8 +6,8 @@ export const redisClient = new Redis({
   host: '216.238.107.146',
   family: 4,
   db: 0,
-  password:
-    'authZEDlLTSACcPFyLc6wMFRdOO83H6L+9Go5ipEucl5Q7YtNWAgb3IQXerqR+OSOPpHtaHxgQ8u3iFYd5ss',
+  // password:
+  //   'authZEDlLTSACcPFyLc6wMFRdOO83H6L+9Go5ipEucl5Q7YtNWAgb3IQXerqR+OSOPpHtaHxgQ8u3iFYd5ss',
   connectTimeout: 10000,
 })
 

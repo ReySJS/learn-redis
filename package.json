@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start-fst-server": "cd ./fst-server && yarn dev",
-    "start-snd-server": "cd ../snd-server && yarn dev",
-    "start-trd-server": "cd ../trd-server && yarn dev"
+    "start-snd-server": "cd ./snd-server && yarn dev",
+    "start-trd-server": "cd ./trd-server && yarn dev"
   }
 }

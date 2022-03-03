@@ -15,6 +15,7 @@
       "@logs/*": ["logs/*"],
       "@middlewares/*": ["middlewares/*"],
       "@routes/*": ["routes/*"],
+      "@roles/*": ["roles/*"],
       "@services/*": ["services/*"],
       "@interface/*": ["interfaces/*"],
       "@validations/*": ["validations/*"]

@@ -33,7 +33,7 @@ export const register = async (req: Request, res: Response) => {
     })
 
     const users = await prisma.user.findMany({})
-    await setRedis(`users`, JSON.stringify(users))
+    await setRedis('users', JSON.stringify(users))
 
     return res.status(200).send('Novo usuário cadastrado com sucesso')
   } catch (err: any) {

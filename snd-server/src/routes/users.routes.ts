@@ -7,9 +7,9 @@
 
 import { Router } from 'express'
 
-import { listUsers } from '../controllers/users/list-users.controller'
-import { getUserInfo } from '../controllers/users/get-user-info.controller'
-import { auth } from '../middlewares/auth'
+import { listUsers } from '@controllers/users/list-users.controller'
+import { getUserInfo } from '@controllers/users/get-user-info.controller'
+import { auth } from '@middlewares/auth'
 
 const routes = Router()
 

@@ -1,17 +1,27 @@
 // -------------------------------------------------------------------------------------------------//
+// Server: 3
 // Archive: src/controllers/users/list-users.controller.ts
-// Description: File responsible for the application's 'register'
-// Data: 2022/02/24
+// Description: File responsible for user listing function
+// Data: 2022/03/02
 // Author: Rey
 // -------------------------------------------------------------------------------------------------//
 
-import { getRedis } from '@app/helpers/RedisClient'
+import { readFileSync } from 'fs'
+import { GetUserListService } from '@app/services/get-user-list.service'
 import { Request, Response } from 'express'
-import prisma from '../../prisma'
 
+type Roles = {
+  userListPermission?: 'enable' | 'disable'
+}
 export const listUsers = async (req: Request, res: Response) => {
-  // const users = await prisma.user.findMany({})
-  const usersRedis = await getRedis('users')
-  const users = JSON.parse(usersRedis)
+  const data = readFileSync('./src/roles/user-roles.json', 'utf8')
+  let role: Roles = JSON.parse(data)
+
+  if (role.userListPermission === 'disable') {
+    return res.status(401).send('You are not authorized to get the user list')
+  }
+
+  let users = await GetUserListService()
+
   return res.json(users)
 }

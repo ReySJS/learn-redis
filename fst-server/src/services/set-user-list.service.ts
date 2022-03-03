@@ -7,11 +7,9 @@
 
 import { redisClient } from '@app/helpers/RedisClient'
 
-type ServiceParams = {
-  permission: 'enable' | 'disable'
-}
+export const SetUserListRoleService = (permission: 'enable' | 'disable') => {
+  console.log(permission)
 
-export const SetUserListRoleService = (permission: ServiceParams) => {
-  redisClient.publish('roleListUsers', JSON.stringify(permission))
+  redisClient.publish('roleListUsers', permission)
   return true
 }

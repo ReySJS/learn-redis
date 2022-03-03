@@ -56,5 +56,5 @@ redisSubscriber.on('message', (channel, permission) => {
       }
     }
   )
-  console.log(`Changed permissions to ${permission}`)
+  console.log(`Permission for listing users changed to "${permission}"`)
 })

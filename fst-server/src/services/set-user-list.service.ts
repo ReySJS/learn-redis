@@ -8,8 +8,9 @@
 import { redisClient } from '@app/helpers/RedisClient'
 
 export const SetUserListRoleService = (permission: 'enable' | 'disable') => {
-  console.log(permission)
 
   redisClient.publish('roleListUsers', permission)
+  console.log(`
+  Permission for listing users changed to "${permission}"`)
   return true
 }
